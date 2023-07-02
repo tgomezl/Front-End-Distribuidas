@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Text, Image, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import rodillo from '../imagen/rodillo.png';
 import axios from 'axios';
+//import {MyContext} from './GLOBAL/GlobalContextProvider.js'
+import {MyContext} from '../../GLOBAL/GlobalContextProvider.js'
 
 const Login = () => {
+
+  //aca me traigo todo lo que quiero usar del contexto
+  const {  idusercontexto,setIdusercontexto,
+    idrecetacontexto,setIdrecetacontexto,
+    nombreusuariocontexto,setNombreusuariocontexto} = useContext(MyContext)
+
   const [nickname, setNickname] = useState('');
   const [contrasenia, setContrasenia] = useState('');
   const navigation = useNavigation();
@@ -37,6 +45,7 @@ const Login = () => {
         console.log(JSON.stringify(response.data));
         navigation.navigate('BottomTab');
         console.log('TERMINE EL PROCESO DE INICIO DE SESION');
+        //setear aca el iddelusercontext
       })
       .catch(error => {
         console.log(error);
@@ -57,6 +66,9 @@ const Login = () => {
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
               <Text style={{ fontWeight: '500', fontSize: 25, color: '#ffffff' }}>Iniciar Sesion</Text>
               <Text style={{ fontWeight: '400', fontSize: 20, color: '#ffffff' }}>Student</Text>
+              <Text style={{ fontWeight: '400', fontSize: 20, color: '#ffffff' }}>ESTA DATA VIENE DEL CONTEXTO!!!</Text>
+              <Text style={{ fontWeight: '400', fontSize: 20, color: '#ffffff' }}>idusercontext {idusercontexto}</Text>
+              <Text style={{ fontWeight: '400', fontSize: 20, color: '#ffffff' }}>idrecetacontext {idusercontexto}</Text>
             </View>
           </View>
         </View>
